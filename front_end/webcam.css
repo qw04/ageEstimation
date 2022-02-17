@@ -1,0 +1,61 @@
+.container{
+	display: grid; /*gives the website's body a grid like quality to ensure that everything looks good*/
+	margin-top: 4rem; /*makes sure that the body doesnt interfere with the navigation bar at the top most scroll of the website*/
+	padding-bottom: 15px;
+	grid-template-columns: 1fr 1fr;
+}
+
+body{
+	background-color: black;
+}
+
+#mainStuff{
+	display: grid;
+	grid-column: 2;
+	grid-row: 1;
+}
+
+#stuff2{
+	display: inline-flex;
+	padding: 10px;
+	margin: 5px;
+	justify-content: space-evenly;
+	align-items: center;
+	background-color: violet;
+	border: solid red 5px;
+	grid-column: 1;
+	grid-row: 1;
+}
+
+#stuff1{
+	display: inline-flex;
+	background-color: lightblue;
+	margin: 5px;
+	border: solid purple 5px;
+	padding: 10px;
+	justify-content: space-evenly;
+	align-items: center;
+	grid-column: 1;
+	grid-row: 2;
+}
+
+#boundaryText{
+	margin: 10px;
+}
+
+#boundaryDropDown{
+	margin: 10px;
+}
+
+p{
+	font-family: "Comic Sans MS", "Comic Sans", cursive;
+}
+
+#videoElement{
+	border: solid blue 5px;
+}
+
+#webcam{
+	grid-column: 1;
+	grid-row: 1;
+}

@@ -1,0 +1,30 @@
+#body{
+	background-color: black;
+}
+.number{
+	display: inline-flex; /*makes sure that these compnents have the flex attribute and are in line*/
+	justify-content: space-evenly; /*spaces these compnents evenly to ensure that one component isnt too big*/
+	border: 5px solid red;
+}
+
+.image{
+	padding: 5px; /*makes sure that there is some space between image and other compnents*/
+	height: 50vmin; /*automatically adjusts the hieght of this compnenets to ensure that it is displayed correctly*/
+	width: 50vmin; /*automatically adjusts the width of this compnenets to ensure that it is displayed correctly*/
+}
+
+.description{
+	padding: 5px; /*makes sure that there is some space between image and other compnents*/
+	background-color: lightblue; /*makes the background of the descriptions blue*/
+}
+
+.container{
+	display: grid; /*gives the website's body a grid like quality to ensure that everything looks good*/
+	margin-top: 4rem; /*makes sure that the body doesnt interfere with the navigation bar at the top most scroll of the website*/
+	grid-auto-columns: auto;
+	padding-bottom: 15px;
+}
+
+p{
+	font-family: "Comic Sans MS", "Comic Sans", cursive;
+}
