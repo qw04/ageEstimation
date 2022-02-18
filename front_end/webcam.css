@@ -33,10 +33,13 @@ body{
 	margin: 5px;
 	border: solid purple 5px;
 	padding: 10px;
-	justify-content: space-evenly;
-	align-items: center;
 	grid-column: 1;
 	grid-row: 2;
+}
+
+#boundary{
+	justify-content: space-evenly;
+	align-items: center;
 }
 
 #boundaryText{
@@ -58,4 +61,5 @@ p{
 #webcam{
 	grid-column: 1;
 	grid-row: 1;
+	margin: 5px;
 }
