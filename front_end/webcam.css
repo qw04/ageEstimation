@@ -4,6 +4,16 @@
 	padding-bottom: 15px;
 	grid-template-columns: 1fr 1fr;
 }
+.select{
+	display: inline-flex;
+	padding: 5px;
+	background-color: lightgreen;
+	border: solid brown 5px;
+}
+
+#webcamText{
+	margin: 5px;
+}
 
 body{
 	background-color: black;
@@ -51,7 +61,7 @@ p{
 	font-family: "Comic Sans MS", "Comic Sans", cursive;
 }
 
-#videoElement{
+video{
 	border: solid blue 5px;
 }
 

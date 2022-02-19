@@ -1,26 +1,49 @@
-var video = document.querySelector("#videoElement");
+var videoElement = document.querySelector('video');
+var videoSelect = document.querySelector('select#videoSource');
 
-// if (navigator.mediaDevices.getUserMedia) {
-//   navigator.mediaDevices.getUserMedia({ video: true })
+videoSelect.onchange = getStream;
 
-//       .then(function (stream) {
-//       video.srcObject = stream;
-//     }).catch(function (err0r) {
-//       alert("Something went wrong, reload webpage!");
-//     });
-// }
+getStream().then(getDevices).then(gotDevices);
 
+function getDevices() {
+  return navigator.mediaDevices.enumerateDevices();
+}
 
-navigator.mediaDevices.enumerateDevices()
-.then(function(devices) {
-  array = [];
-  devices.forEach(function(device) {
-    if (device.kind === "videoinput"){
-      array.push([device.deviceId,device.label]);
-    };
-    console.log(array);
+function gotDevices(deviceInfos) {
+  window.deviceInfos = deviceInfos; // make available to console
+  console.log('Available input and output devices:', deviceInfos);
+  for (const deviceInfo of deviceInfos) {
+    const option = document.createElement('option');
+    option.value = deviceInfo.deviceId;
+    if (deviceInfo.kind === 'videoinput') {
+      option.text = deviceInfo.label || `Camera ${videoSelect.length + 1}`;
+      videoSelect.appendChild(option);
+    }
   }
-  )
-}).catch(function(err) {
-  alert(err.name + ": " + err.message);
-});
+}
+
+function getStream() {
+  if (window.stream) {
+    window.stream.getTracks().forEach(track => {
+      track.stop();
+    });
+  }
+  const videoSource = videoSelect.value;
+  const constraints = {
+    video: {deviceId: videoSource ? {exact: videoSource} : undefined}
+  };
+  return navigator.mediaDevices.getUserMedia(constraints).
+    then(gotStream).catch(handleError);
+}
+
+function gotStream(stream) {
+  window.stream = stream; // make stream available to console
+  videoSelect.selectedIndex = [...videoSelect.options].
+    findIndex(option => option.text === stream.getVideoTracks()[0].label);
+  videoElement.srcObject = stream;
+}
+
+function handleError(error) {
+  console.error('Error: ', error);
+}
+
