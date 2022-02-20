@@ -70,3 +70,20 @@ video{
 	grid-row: 1;
 	margin: 5px;
 }
+
+#webcamText{
+	margin: 5px;
+}
+
+#videoSourceDiv{
+	justify-content: center;
+	align-items: center;
+	grid-column: 1;
+	grid-row: 3;
+	margin: 5px;
+}
+
+#videoSource{
+	margin: 5px;
+	max-width: 100px;
+}
