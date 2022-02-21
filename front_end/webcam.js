@@ -47,3 +47,16 @@ function handleError(error) {
   console.error('Error: ', error);
 }
 
+let click_button = document.querySelector("#click-photo");
+let canvas = document.querySelector("#canvas");
+let video = document.querySelector("video");
+
+click_button.addEventListener('click', function() {
+    canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+    let image_data_url = canvas.toDataURL('image/png');
+    var ctx = canvas.getContext('2d');
+    ctx.fillStyle = 'black';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    console.log(image_data_url);
+
+});

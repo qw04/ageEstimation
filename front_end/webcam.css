@@ -92,3 +92,23 @@ video{
 	margin: 5px;
 	max-width: 100px;
 }
+
+
+#canvas{
+	grid-row: 2;
+	grid-column: 2;
+}
+
+#clickPhotoContainer{
+	grid-column: 1;
+	grid-row: 2;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+}
+
+#click-photo{
+	/*max-width: 200px;*/
+	/*max-height: 100px;*/
+}
+	
