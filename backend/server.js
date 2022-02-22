@@ -1,29 +1,34 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require("cors");
-
+const fs = require("fs");
+const Buffer = require('buffer').Buffer;
 const app = express();
 
-// app.use(express.json())
+a = null
+let string = ";"
+
+function join(array) {
+	array.forEach(element =>{
+		string.concat('element')
+	})
+	return string
+}
+
 
 app.use(cors())
 app.use(bodyParser.json())
 
-let a = null;
-let dataRecieved = [];
-let count = 0;
-let temp = []
-
-function convert(string){
-	
-}
-
 app.post('/', (req, res) =>{
 	console.log('post is working');
 	let string = req.body.Data
-	let image = convert(string)
-})
 
+	var data = string.replace(/^data:image\/\w+;base64,/, "");
+	// console.log(data)
+	var buf = Buffer.from(data, 'base64');
+	fs.writeFileSync('image.png', buf);
+})
+ 
 app.get('/', (req, res)=>{
 	console.log('get is working')
 	res.send(JSON.stringify(a))

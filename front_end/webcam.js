@@ -47,16 +47,6 @@ function handleError(error) {
   console.error('Error: ', error);
 }
 
-
-function dataURLtoFile(dataurl, filename) {
-    var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
-        bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
-    while(n--){
-        u8arr[n] = bstr.charCodeAt(n);
-    }
-    return new File([u8arr], filename, {type:mime});
-}
-
 let click_button = document.querySelector("#click-photo");
 let canvas = document.querySelector("#canvas");
 let video = document.querySelector("video");
@@ -84,17 +74,14 @@ function upload(array){
 
 click_button.addEventListener('click', function() {
     canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
-    let image_data_url = canvas.toDataURL('image/png');
+    let image_data_url = canvas.toDataURL('image/jpg');
     var ctx = canvas.getContext('2d');
     ctx.fillStyle = 'black';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    // let array = split(image_data_url, 70000);
+    // console.log(image_data_url)
     let array = [image_data_url]
-    console.log(array.length)
-    // array.push('stop')
-    // array.push(String(array.length))
-    
+    // console.log(array.length)
+
     upload(array)  
     fetch('http://localhost:3000').then(res => {console.log(res.json())})
   
