@@ -11,7 +11,7 @@ function getDevices() {
 
 function gotDevices(deviceInfos) {
   window.deviceInfos = deviceInfos; // make available to console
-  console.log('Available input and output devices:', deviceInfos);
+  // console.log('Available input and output devices:', deviceInfos);
   for (const deviceInfo of deviceInfos) {
     const option = document.createElement('option');
     option.value = deviceInfo.deviceId;
@@ -57,6 +57,15 @@ click_button.addEventListener('click', function() {
     var ctx = canvas.getContext('2d');
     ctx.fillStyle = 'black';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    console.log(image_data_url);
 
-});
+    console.log(image_data_url)
+
+    fetch('http://localhost:3000', {
+          method: 'POST',
+          body: JSON.stringify({"Data": "hello"}),
+          headers: {'Content-Type': 'application/json'
+                  }
+          })
+    .catch(error => {console.error('Error:', error)})
+
+    fetch('http://localhost:3000').then(res => {console.log(res.json())})})
