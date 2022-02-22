@@ -47,9 +47,40 @@ function handleError(error) {
   console.error('Error: ', error);
 }
 
+
+function dataURLtoFile(dataurl, filename) {
+    var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+    while(n--){
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new File([u8arr], filename, {type:mime});
+}
+
 let click_button = document.querySelector("#click-photo");
 let canvas = document.querySelector("#canvas");
 let video = document.querySelector("video");
+
+function split(str, size) {
+  const numChunks = Math.ceil(str.length / size)
+  const chunks = new Array(numChunks)
+
+  for (let i = 0, o = 0; i < numChunks; ++i, o += size) {
+    chunks[i] = str.substr(o, size)
+  }
+
+  return chunks
+}
+
+function upload(array){
+  array.forEach(element => {fetch('http://localhost:3000', {
+          method: 'POST',
+          body: JSON.stringify({"Data": element}),
+          headers: {'Content-Type': 'application/json'},
+          }).catch(error => {console.error('Error:', error)})
+    })
+}
+
 
 click_button.addEventListener('click', function() {
     canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
@@ -58,14 +89,13 @@ click_button.addEventListener('click', function() {
     ctx.fillStyle = 'black';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    console.log(image_data_url)
-
-    fetch('http://localhost:3000', {
-          method: 'POST',
-          body: JSON.stringify({"Data": "hello"}),
-          headers: {'Content-Type': 'application/json'
-                  }
-          })
-    .catch(error => {console.error('Error:', error)})
-
-    fetch('http://localhost:3000').then(res => {console.log(res.json())})})
+    // let array = split(image_data_url, 70000);
+    let array = [image_data_url]
+    console.log(array.length)
+    // array.push('stop')
+    // array.push(String(array.length))
+    
+    upload(array)  
+    fetch('http://localhost:3000').then(res => {console.log(res.json())})
+  
+  })
