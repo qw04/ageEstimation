@@ -7,8 +7,8 @@ const app = express();
 const {spawn} = require('child_process');
 
 
-let obj = JSON.stringify({a:null});
 let string = "";
+let temp = false;
 
 function join(array) {
 	array.forEach(element =>{
@@ -31,13 +31,16 @@ app.post('/', (req, res) =>{
 	fs.writeFileSync('image.png', buf);   
 })
  
+
+
 app.get('/', async (req, res)=>{
 
+	let obj = JSON.stringify({a:"null"});
 	fs.writeFile('file.json', obj, (err) => {
 		if (err) {
 			throw err;
 		}
-	    // console.log("JSON data is saved.");
+	    console.log("JSON data is saved.");
 	});
 	
 	const python = spawn('python', ['model.py']);
@@ -45,18 +48,27 @@ app.get('/', async (req, res)=>{
  		console.log('model has predicted');
  	});
 
-	await new Promise(resolve => setTimeout(resolve, 4000));
 
-	console.log('get is working');
-	fs.readFile('file.json', 'utf-8', (err, data) => {
-	if (err) {throw err;}
-	obj = JSON.parse(data.toString());
-	res.send(JSON.stringify(obj.a));
-	});
-	
+	// obj = read()
+	let temp = "null";
+	while (temp === "null"){
+		// console.log(temp);
+		fs.readFile('file.json', 'utf-8', (err, data) => {
+			if (err) {throw err;}
+			obj = data.toString();
+			temp = JSON.parse(obj).a;
+		})
+		// console.log(temp)
+		await new Promise(resolve => setTimeout(resolve, 500));
+	}
+	if (temp === 1 || temp === 0){
+		console.log("get is working");
+		res.send(JSON.stringify(JSON.parse(obj).a));
+	}
+
 // async function needs to have a catch block
 
-}.catch(err => {throw err;}))
+})
 
 app.listen(3000, ()=> { 
 	console.log('app is running on port 3000')
