@@ -83,6 +83,9 @@ click_button.addEventListener('click', function() {
     // console.log(array.length)
 
     upload(array)  
-    fetch('http://localhost:3000').then(res => {console.log(res.json())})
-  
+    let result = document.querySelector("#resultText");
+    result.innerText = "result: thinking";
+    fetch('http://localhost:3000').then(res => {console.log(res.json())}).catch(err => {console.error('Error: ', err)})
+    // result.innerText = "result: " + res.json()
+    // take data from promise and update website
   })
