@@ -63,37 +63,53 @@ function split(str, size) {
 }
 
 function upload(array){
-  array.forEach(element => {fetch('http://localhost:3000', {
-          method: 'POST',
-          body: JSON.stringify({"Data": element}),
-          headers: {'Content-Type': 'application/json'},
-          }).catch(error => {console.error('Error:', error)})
-    })
+
 }
 
 
 click_button.addEventListener('click', function() {
+    let result = document.querySelector("#resultText");
+    result.innerText = "result: None";
     canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
     let image_data_url = canvas.toDataURL('image/jpg');
     var ctx = canvas.getContext('2d');
     ctx.fillStyle = 'black';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    let array = split(image_data_url, 20000);
+    let array = split(image_data_url, 65000);
     // let array = [image_data_url]
     array.push("stop")
     // console.log(array.length)
-    upload(array)
 
-    let result = document.querySelector("#resultText");
+    array.forEach(element => {fetch('http://localhost:3000', {
+      method: 'POST',
+      body: JSON.stringify({"Data": element}),
+      headers: {'Content-Type': 'application/json'},
+      }).then((dat) => { return dat.json()})
+        .then((stuff) => {
+          if (stuff.wow === "done"){
+          fetch('http://localhost:3000')
+          .then(res => {return res.json()})
+          .then(dat => {
+            let temp = JSON.parse(dat).a;
+            if (temp === 1){
+              result.innerText = "result: "+ "over the age boundary";
+            }else{
+              result.innerText = "result: "+ "under the age boundary";
+            }
+          })
+          .catch(err => {console.error('Error: ', err)})
+          }
+        })    
+        // 
+      
+      })
+
     result.innerText = "result: thinking";
     
     //wait till the keyword arrives
     //then fetch post arrives on the backend too slow
-    fetch('http://localhost:3000').then(res => {console.log(res.json())}).catch(err => {console.error('Error: ', err)})
-    // result.innerText = "result: " + res.json()
+    
+    
     // take data from promise and update website
 
-
-
-
-  })
+    })

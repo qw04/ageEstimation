@@ -24,16 +24,16 @@ app.use(bodyParser.json())
 
 app.post('/', (req, res) =>{
 
+	console.log('post is working');
 	let newString = req.body.Data
 	if (newString === "stop"){
-		console.log('post is working');
 		let temp = join(array);
 		// console.log();
 		var data = temp.replace(/^data:image\/\w+;base64,/, "");
 		var buf = Buffer.from(data, 'base64');
 		fs.writeFileSync('image.png', buf);
 		array = [];
-		res.send("done")
+		res.send(JSON.stringify({"wow":"done"}));
 	}else{
 		array.push(newString);
 	}
@@ -55,7 +55,7 @@ app.get('/', async (req, res)=>{
 		if (err) {
 			throw err;
 		}
-	    // console.log("JSON data is saved.");
+	    console.log("JSON data is saved.");
 	});
 	
 	const python = spawn('python', ['model.py']);
@@ -77,7 +77,7 @@ app.get('/', async (req, res)=>{
 	}
 	if (temp === 1 || temp === 0){
 		console.log("get is working");
-		res.send(JSON.stringify(JSON.parse(obj).a));
+		res.send(JSON.stringify(obj));
 	}
 })
 
