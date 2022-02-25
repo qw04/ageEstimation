@@ -78,14 +78,22 @@ click_button.addEventListener('click', function() {
     var ctx = canvas.getContext('2d');
     ctx.fillStyle = 'black';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    // console.log(image_data_url)
-    let array = [image_data_url]
+    let array = split(image_data_url, 20000);
+    // let array = [image_data_url]
+    array.push("stop")
     // console.log(array.length)
+    upload(array)
 
-    upload(array)  
     let result = document.querySelector("#resultText");
     result.innerText = "result: thinking";
+    
+    //wait till the keyword arrives
+    //then fetch post arrives on the backend too slow
     fetch('http://localhost:3000').then(res => {console.log(res.json())}).catch(err => {console.error('Error: ', err)})
     // result.innerText = "result: " + res.json()
     // take data from promise and update website
+
+
+
+
   })
