@@ -12,6 +12,13 @@ def pred():
 	cv2.imwrite('image.jpg', image, [int(cv2.IMWRITE_JPEG_QUALITY), 100])
 	image = cv2.imread('image.jpg', cv2.IMREAD_COLOR)
 	# print(image.shape)
+	
+	anotherPath = "haarcascade_frontalface_default.xml"
+	face_cascade = cv2.CascadeClassifier(anotherPath)
+
+	gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+	faces = face_cascade.detectMultiScale(gray, 1.3, 5)
+	print(faces)
 
 	image = cv2.resize(image, (IMG_WIDTH, IMG_HEIGHT), interpolation=cv2.INTER_AREA)
 
