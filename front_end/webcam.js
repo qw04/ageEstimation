@@ -62,10 +62,6 @@ function split(str, size) {
   return chunks
 }
 
-function upload(array){
-
-}
-
 
 click_button.addEventListener('click', function() {
     let result = document.querySelector("#resultText");
@@ -93,8 +89,10 @@ click_button.addEventListener('click', function() {
             let temp = JSON.parse(dat).a;
             if (temp === 1){
               result.innerText = "result: "+ "over the age boundary";
-            }else{
+            }else if(temp === 0){
               result.innerText = "result: "+ "under the age boundary";
+            }else{
+              result.innerText = "result: "+ temp;
             }
           })
           .catch(err => {console.error('Error: ', err)})

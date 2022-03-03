@@ -75,7 +75,7 @@ app.get('/', async (req, res)=>{
 		// console.log(temp)
 		await new Promise(resolve => setTimeout(resolve, 500));
 	}
-	if (temp === 1 || temp === 0){
+	if (temp === 1 || temp === 0 || temp === "no faces" || temp === "too many faces"){
 		console.log("get is working");
 		res.send(JSON.stringify(obj));
 	}
