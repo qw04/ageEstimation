@@ -63,17 +63,15 @@ p{
 
 video{
 	border: solid blue 5px;
+	max-height: 1000px;
+	max-width: 1000px;
+
 }
 
 #webcam{
 	grid-column: 1;
 	grid-row: 1;
 	margin: 5px;
-}
-
-video{
-	max-height: 1000px;
-	max-width: 1000px;
 }
 
 #webcamText{
@@ -106,5 +104,3 @@ video{
 	justify-content: center;
 	align-items: flex-start;
 }
-
-	

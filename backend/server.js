@@ -6,12 +6,10 @@ const Buffer = require('buffer').Buffer;
 const app = express();
 const {spawn} = require('child_process');
 
-
-let string = "";
-let temp = false;
 let array = [];
 
 function join(array) {
+	let string = "";
 	array.forEach(element =>{
 		string = string.concat(element)
 	})
@@ -37,13 +35,6 @@ app.post('/', (req, res) =>{
 	}else{
 		array.push(newString);
 	}
-
-	// console.log("post is working")
-	// let temp = req.body.Data;
-	// var data = temp.replace(/^data:image\/\w+;base64,/, "");
-	// var buf = Buffer.from(data, 'base64');
-	// fs.writeFileSync('image.png', buf);
-
 })
  
 
@@ -75,7 +66,7 @@ app.get('/', async (req, res)=>{
 		// console.log(temp)
 		await new Promise(resolve => setTimeout(resolve, 500));
 	}
-	if (temp === 1 || temp === 0 || temp === "no faces" || temp === "too many faces"){
+	if (temp != "null"){
 		console.log("get is working");
 		res.send(JSON.stringify(obj));
 	}
