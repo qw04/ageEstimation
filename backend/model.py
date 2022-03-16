@@ -4,7 +4,16 @@ def pred():
 	import json
 	import cv2
 
-	model = tf.keras.models.load_model('assets')
+
+	a_file = open("file.json", "r")
+	json_object = json.load(a_file)
+	a_file.close()
+
+	if json_object["boundary"] == "21":
+		model = tf.keras.models.load_model('twenty_one')
+	elif json_object["boundary"] == "18":
+		model = tf.keras.models.load_model('eighteen')
+
 	IMG_WIDTH = 50
 	IMG_HEIGHT = 50
 
@@ -34,7 +43,9 @@ def pred():
 		json_object["a"] = predictions.index(max(list(predictions)))
 		json.dump(json_object, a_file)
 		a_file.close()
+
 	elif len(faces) == 0:
+
 		a_file = open("file.json", "r")
 		json_object = json.load(a_file)
 		a_file.close()
@@ -43,7 +54,9 @@ def pred():
 		json_object["a"] = "no faces"
 		json.dump(json_object, a_file)
 		a_file.close()		
+
 	elif len(faces) >= 2:
+		
 		a_file = open("file.json", "r")
 		json_object = json.load(a_file)
 		a_file.close()

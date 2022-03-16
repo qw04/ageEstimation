@@ -24,9 +24,18 @@ app.post('/', (req, res) =>{
 
 	console.log('post is working');
 	let newString = req.body.Data
-	if (newString === "stop"){
+	if (newString.substr(0,4) === "stop"){
 		let temp = join(array);
 		// console.log();
+
+		let boundary = newString.substr(4)
+		let obj = JSON.stringify({"a": "null", "boundary": boundary});
+		fs.writeFile('file.json', obj, (err) => {
+			if (err) {
+				throw err;
+			}
+		});
+
 		var data = temp.replace(/^data:image\/\w+;base64,/, "");
 		var buf = Buffer.from(data, 'base64');
 		fs.writeFileSync('image.png', buf);
@@ -41,13 +50,19 @@ app.post('/', (req, res) =>{
 
 app.get('/', async (req, res)=>{
 
-	let obj = JSON.stringify({a:"null"});
-	fs.writeFile('file.json', obj, (err) => {
-		if (err) {
-			throw err;
-		}
-	    console.log("JSON data is saved.");
-	});
+	fs.readFile('file.json', 'utf-8', (err, data) => {
+			if (err) {throw err;}
+			let obj = data;
+			obj.a = "null";
+			fs.writeFile('file.json', obj, (err) => {
+			if (err) {
+				throw err;
+			}
+	    	console.log("JSON data is saved.");
+			});
+		})
+
+	
 	
 	const python = spawn('python', ['model.py']);
 	python.on('close', (code) => {
@@ -64,11 +79,11 @@ app.get('/', async (req, res)=>{
 			temp = JSON.parse(obj).a;
 		})
 		// console.log(temp)
-		await new Promise(resolve => setTimeout(resolve, 500));
+		await new Promise(resolve => setTimeout(resolve, 1000));
 	}
 	if (temp != "null"){
-		console.log("get is working");
 		res.send(JSON.stringify(obj));
+		console.log("get is working");
 	}
 })
 

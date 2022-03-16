@@ -56,6 +56,7 @@ navigator.mediaDevices.getUserMedia(constraints).then(stream => videoElement.src
 
 let click_button = document.querySelector("#click-photo");
 let canvas = document.querySelector("#canvas");
+let boundary = document.querySelector("#boundaryDropDown");
 
 function split(str, size) {
   const numChunks = Math.ceil(str.length / size)
@@ -71,47 +72,50 @@ function split(str, size) {
 
 click_button.addEventListener('click', function() {
     canvas.getContext('2d').drawImage(videoElement, 0, 0, canvas.width, canvas.height);
-    let image_data_url = canvas.toDataURL('image/jpg');
+    let image_data_url = canvas.toDataURL('image/png');
     // console.log(image_data_url)
     
     canvas.getContext('2d').fillStyle = 'black';
     canvas.getContext('2d').fillRect(0, 0, canvas.width, canvas.height);
+    let selected_boundary = boundary.value;
+    if (selected_boundary == "None"){
+      alert("wrong boundary")
+    }else{
+      let array = split(image_data_url, 65000);
+      // let array = [image_data_url]
+      array.push("stop"+selected_boundary)
+      // console.log(array.length)
 
-    let array = split(image_data_url, 65000);
-    // let array = [image_data_url]
-    array.push("stop")
-    // console.log(array.length)
 
 
-
-    array.forEach(element => {fetch('http://localhost:3000', {
-      method: 'POST',
-      body: JSON.stringify({"Data": element}),
-      headers: {'Content-Type': 'application/json'},
-      }).then((dat) => { return dat.json()})
-        .then((stuff) => {
-          if (stuff.wow === "done"){
-          fetch('http://localhost:3000')
-          .then(res => {return res.json()})
-          .then(dat => {
-            let temp = JSON.parse(dat).a;
-            if (temp === 1){
-              result.innerText = "result: "+ "over the age boundary";
-            }else if(temp === 0){
-              result.innerText = "result: "+ "under the age boundary";
-            }else{
-              result.innerText = "result: "+ temp;
+      array.forEach(element => {fetch('http://localhost:3000', {
+        method: 'POST',
+        body: JSON.stringify({"Data": element}),
+        headers: {'Content-Type': 'application/json'},
+        }).then((dat) => { return dat.json()})
+          .then((stuff) => {
+            if (stuff.wow === "done"){
+            fetch('http://localhost:3000')
+            .then(res => {return res.json()})
+            .then(dat => {
+              let temp = JSON.parse(dat).a;
+              if (temp === 1){
+                result.innerText = "result: "+ "over the age boundary";
+              }else if(temp === 0){
+                result.innerText = "result: "+ "under the age boundary";
+              }else{
+                result.innerText = "result: "+ temp;
+              }
+            })
+            .catch(err => {console.error('Error: ', err)})
             }
-          })
-          .catch(err => {console.error('Error: ', err)})
-          }
-        })    
-        // 
-      
-      })
+          })    
+          // 
+        
+        })
 
-    result.innerText = "result: processing";
-    
+      result.innerText = "result: processing";
+    }
     //wait till the keyword arrives
     //then fetch post arrives on the backend too slow
     
