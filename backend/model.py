@@ -14,8 +14,8 @@ def pred():
 	elif json_object["boundary"] == "18":
 		model = tf.keras.models.load_model('eighteen')
 
-	IMG_WIDTH = 50
-	IMG_HEIGHT = 50
+	IMG_WIDTH = 200
+	IMG_HEIGHT = 200
 
 	image = cv2.imread('image.png', cv2.IMREAD_UNCHANGED)
 	cv2.imwrite('image.jpg', image, [int(cv2.IMWRITE_JPEG_QUALITY), 100])
