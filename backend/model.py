@@ -30,7 +30,7 @@ def pred():
 
 	if len(faces) == 1:
 
-		image = cv2.resize(image, (IMG_WIDTH, IMG_HEIGHT), interpolation=cv2.INTER_AREA)
+		image = cv2.resize(gray, (IMG_WIDTH, IMG_HEIGHT), interpolation=cv2.INTER_AREA)
 		predictions = model.predict(np.array([image]))
 		predictions = predictions.tolist()[0]
 		# print(predictions)
