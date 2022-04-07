@@ -35,3 +35,10 @@ p{
 #refrences{
 	list-style: none;
 }
+
+#mail{
+	width: 181vmin;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
