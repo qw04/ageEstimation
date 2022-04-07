@@ -9,7 +9,7 @@
 
 .image{
 	padding: 5px; /*makes sure that there is some space between image and other compnents*/
-	height: 50vmin; /*automatically adjusts the hieght of this compnenets to ensure that it is displayed correctly*/
+	height: 35vmin; /*automatically adjusts the hieght of this compnenets to ensure that it is displayed correctly*/
 	width: 50vmin; /*automatically adjusts the width of this compnenets to ensure that it is displayed correctly*/
 }
 
@@ -27,4 +27,11 @@
 
 p{
 	font-family: "Comic Sans MS", "Comic Sans", cursive;
+}
+#graph{
+	width: 70vmin;
+}
+
+#refrences{
+	list-style: none;
 }

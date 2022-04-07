@@ -39,18 +39,13 @@
 		<div class="number">
 			<div>
 				<!-- I have decided to use random images initially and then replace them with real content later on in the developement -->
-				<img class="image" src="images/imageOne.jpg"> <!-- this is one of the images that will be in place for one of the files -->
+				<img class="image" src="images/black_box.jpg"> <!-- this is one of the images that will be in place for one of the files -->
 			</div>
 
 			<div class="description">
 				<!-- for the description I decided to use the lorem ipsum paragraphs as they are nice replacements for good pieces of texts -->
 				<p> 
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					In this section, I will be talking about the limitations of the solution that I have implemented. The main one is the fact that my model, is a black box model, therefore, I have no clue regarding how the decision is made by the model. This means that my model could be using some of the biases of the images, I used to train my model with. Moreover, another drawback, is that my model attempts to predict age based on the face which displays the biological age of the person, not the chronological age (as laws are based on that) which I want to predict, while the chronological and biological age will have some similarities, my classification will be somewhat accurate, but not entirely accurate.
 				<p/>
 			</div>
 		</div>
@@ -59,48 +54,43 @@
 			<!-- like the first part of the body this also contains a filler image, and the lorem ipsum paragraphs just in the opposite way to make the website look nice -->
 			<div class = "description">
 				<p>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					Another problem with my model, is that accuracy is based from person to person and the predictions dont have an element of inherent randomness to them, therefore some people will always look older, and therefore be classified as being over even if they aren’t, therefore taking more samples of their face might not help a lot. Here are the accuracies of both my models:
 				</p>
 			</div>
 
 			<div>
-				<img class = "image" src="images/imageTwo.cms">
+				<img class = "image" id = "graph" src="images/graph.jpg">
 			</div>
 		</div>
 		
 		<div class = "number">
 			<!-- this is going to just like the first part to reverse the order again from the second part of the body-->
 			<div>
-				<img class="image" src="images/imageThree.png">
+				<img class="image" src="images/privacy.jpg">
 			</div>
 
 			<div class = "description">
 				<p>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					I am not violating any privacy laws, as I am storing the image only for the time that it takes for the next request to be made.
 				</p>
 			</div>
 		</div>
 		<div class="number">
 			<!-- like the first part of the body this also contains a filler image, and the lorem ipsum paragraphs just in the opposite way to make the website look nice -->
 			<div class = "description">
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-				</p>
+				<ul id = "refrences">
+					<li>https://www.nature.com/articles/cr201536 </li>
+					<li>https://towardsdatascience.com/age-detection-using-facial-images-traditional-machine-learning-vs-deep-learning-2437b2feeab2</li>
+					<li>https://www.sciencedirect.com/science/article/pii/S1319157815000592</li>
+					<li>https://peerj.com/articles/cs-197/</li>
+					<li>https://ieeexplore.ieee.org/abstract/document/8950353</li>
+					<li>https://towardsdatascience.com/learning-rate-schedules-and-adaptive-learning-rate-methods-for-deep-learning-2c8f433990d1</li>
+					<li>https://analyticsindiamag.com/guide-to-tensorflow-keras-optimizers/</li>
+					<li>https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6879191/</li>
+				</ul>
+			</div>
+			<div>
+				<img class="image" src="images/sources.jpg">
 			</div>
 		</div>
 	</div>
