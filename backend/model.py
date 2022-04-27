@@ -3,7 +3,7 @@ def pred():
 	import tensorflow as tf
 	import json
 	import cv2
-
+	import os
 
 	a_file = open("file.json", "r")
 	json_object = json.load(a_file)
@@ -65,6 +65,12 @@ def pred():
 		json_object["a"] = "too many faces"
 		json.dump(json_object, a_file)
 		a_file.close()
+
+	try:
+		os.remove("image.png")
+		os.remove("image.jpg")
+	except:
+		pass
 
 if __name__ == '__main__':
 	pred()
