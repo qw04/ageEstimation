@@ -10,3 +10,6 @@ body{
 }
 
 
+video{
+	border: solid red 5px;
+}
